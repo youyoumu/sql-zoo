@@ -40,4 +40,8 @@ SELECT continent, name, area FROM world x
           AND population>0)
 
 -- 8
+SELECT continent, name FROM world x
+WHERE name <=ALL(SELECT name FROM world y
+WHERE x.continent = y.continent )
+
 
