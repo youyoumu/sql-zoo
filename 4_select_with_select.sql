@@ -44,4 +44,15 @@ SELECT continent, name FROM world x
 WHERE name <=ALL(SELECT name FROM world y
 WHERE x.continent = y.continent )
 
+-- 9
+SELECT name, continent, population FROM world GROUP BY continent HAVING MAX(population) < 25000000
 
+-- 10
+SELECT name, continent 
+FROM world x 
+WHERE population >= ALL(SELECT population*3 
+                        FROM world y 
+                        WHERE x.continent = y.continent AND
+                        y.population != (SELECT MAX(population)
+                                         FROM world z 
+                                         WHERE z.continent = y.continent))
